@@ -291,6 +291,16 @@ export function Ico({ name }: { name: IconName }) {
         <path d="M5 19 13 11" />
       </>
     ),
+    cabin: (
+      <>
+        {/* flat-roof garden room: overhanging roof, clad wall, glazed front */}
+        <path d="M2.5 8.5h19" />
+        <path d="M4 8.5V20h16V8.5" />
+        <path d="M9.5 20v-8h5v8" />
+        <path d="M12 12v8" />
+        <path d="M7 12h1M16 12h1" />
+      </>
+    ),
     van: (
       <>
         <path d="M3 7h10v9H3z" />

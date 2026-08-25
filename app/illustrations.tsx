@@ -25,6 +25,7 @@ export type IllustrationVariant =
   | "painting"
   | "door"
   | "bench"
+  | "gardenroom"
   | "band";
 
 /* horizontal dimension line with end ticks + arrowheads + label */
@@ -161,6 +162,27 @@ export function Illustration({
         {/* tap */}
         <path d="M150 150v-10a8 8 0 0 1 16 0" stroke={ACC} strokeWidth="2" fill="none" />
         <DimH x1={80} x2={320} y={66} label="3600" />
+      </g>
+    ),
+    gardenroom: (
+      <g strokeLinecap="round" strokeLinejoin="round">
+        {/* overhanging flat roof */}
+        <rect x="64" y="96" width="272" height="12" fill={accFill} stroke={INK} strokeWidth="2" />
+        {/* clad walls either side of the glazed front */}
+        <rect x="74" y="108" width="252" height="124" {...stroke} />
+        {[86, 96, 106, 296, 306, 316].map((x) => (
+          <line key={x} x1={x} y1="108" x2={x} y2="232" stroke={HAIR} strokeWidth="1.5" />
+        ))}
+        {/* fixed lights, then the door pair on centre */}
+        <rect x="116" y="120" width="56" height="100" {...stroke} />
+        <rect x="180" y="120" width="40" height="100" {...stroke} />
+        <rect x="220" y="120" width="40" height="100" {...stroke} />
+        <rect x="268" y="120" width="20" height="100" {...stroke} />
+        <path d="M214 170h-4M226 170h4" stroke={ACC} strokeWidth="2" fill="none" />
+        {/* level base */}
+        <line x1="58" y1="232" x2="342" y2="232" stroke={INK} strokeWidth="2" />
+        <path d="M66 232l-6 8M84 232l-6 8M316 232l-6 8M334 232l-6 8" stroke={HAIR} strokeWidth="1.5" fill="none" />
+        <DimH x1={64} x2={336} y={84} label="4200" />
       </g>
     ),
     shelving: (

@@ -11,6 +11,7 @@ import ProcessJourney from "./process-journey";
 import { Illustration } from "./illustrations";
 import {
   BUSINESS,
+  HOME_WORK,
   MATERIALS,
   PRICE_FACTORS,
   PROCESS,
@@ -18,7 +19,6 @@ import {
   SERVICE_GROUPS,
   STATEMENT,
   TRUST,
-  WORK,
 } from "./site";
 import {
   ArrowGlyph,
@@ -76,9 +76,9 @@ export default function Home() {
             >
               <Photo
                 item={{
-                  subject: "Marking out on site",
-                  src: "/work/hero.jpg",
-                  alt: "A joiner marking a length of timber before cutting it",
+                  subject: "Shaker kitchen and island",
+                  src: "/work/kitchen-green.jpg",
+                  alt: "A sage green shaker kitchen with a marble-topped island beneath a glazed lantern roof",
                   art: (
                     <Illustration variant="kitchen" index="01" label="On site" />
                   ),
@@ -122,9 +122,9 @@ export default function Home() {
       <section className="relative h-[65vh] min-h-[420px] overflow-hidden bg-ink">
         <Photo
           item={{
-            subject: "Tools on the bench",
-            src: "/work/band.jpg",
-            alt: "Hand tools and wood shavings laid out on a workbench",
+            subject: "Cedar-clad garden room",
+            src: "/work/garden-room-wide.jpg",
+            alt: "The front elevation of a timber-clad garden room with French doors and full-height side windows",
             art: <Illustration variant="band" />,
           }}
           sizes="100vw"
@@ -134,8 +134,9 @@ export default function Home() {
           <div className="mx-auto max-w-6xl px-5 pb-12 sm:px-8 sm:pb-14">
             <Reveal>
               <p className="max-w-xl text-pretty font-display text-xl font-medium leading-[1.4] text-white sm:text-2xl">
-                Cutting happens outside or under extraction. Floors get sheeted.
-                The room is swept at the end of each day, not the end of the job.
+                A garden room is a building, not a shed. Base laid level, frame
+                run plumb, and the doors set out so the cladding lands evenly
+                either side of them.
               </p>
             </Reveal>
           </div>
@@ -168,7 +169,10 @@ export default function Home() {
                       <Photo
                         item={{
                           subject: group.title,
-                          src: group.image,
+                          /* Deliberately no photo: the home page already carries
+                             three down this scroll, and the measured drawings
+                             give the middle of the page a change of texture.
+                             The Services page shows the photographs. */
                           alt: group.imageAlt,
                           art: (
                             <Illustration
@@ -249,7 +253,7 @@ export default function Home() {
           </div>
 
           <div className="mt-14 grid gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-            {WORK.map((item, i) => (
+            {HOME_WORK.map((item, i) => (
               <ImageReveal
                 key={item.subject}
                 delay={(i % 3) * 0.06}

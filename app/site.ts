@@ -74,6 +74,7 @@ export type IconName =
   | "hexkey"
   | "leaf"
   | "van"
+  | "cabin"
   | "wall";
 
 export type Service = {
@@ -103,9 +104,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
     caption: "Built to the opening you have",
     summary:
       "Made-to-measure work for spaces that no standard unit will fit. Templated on site, built to those exact dimensions, scribed in so the joints close.",
-    image: "/work/shelving.jpg",
-    imageAlt:
-      "Built-in alcove shelving with oak shelves above painted cupboards",
+    /* No photograph of our own joinery yet, so the measured drawing stands. */
     art: "shelving",
     items: [
       {
@@ -144,8 +143,9 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
     caption: "The structural side of a project",
     summary:
       "Rooms taken back to brick and rebuilt. We handle the sequence so trades turn up in the right order and the job does not stall halfway.",
-    image: "/work/kitchen.jpg",
-    imageAlt: "A fitted kitchen with wood-effect units and a stone worktop",
+    image: "/work/kitchen-dark.jpg",
+    imageAlt:
+      "A dark handleless kitchen with a stone worktop and a range cooker",
     art: "kitchen",
     items: [
       {
@@ -183,10 +183,11 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
     title: "Finishes and outdoor",
     caption: "The last ten per cent, and the garden",
     summary:
-      "The stage that decides how the whole job reads. Plus fencing, decking and clearance for the space outside.",
-    image: "/work/flooring.jpg",
-    imageAlt: "Engineered wood flooring being laid plank by plank",
-    art: "flooring",
+      "The stage that decides how the whole job reads. Plus the work outside: garden rooms, fencing, decking and clearance.",
+    image: "/work/garden-room-cedar.jpg",
+    imageAlt:
+      "A timber-clad garden room with a flat roof and a run of bi-fold doors",
+    art: "gardenroom",
     items: [
       {
         name: "Flooring",
@@ -201,6 +202,13 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
         blurb: "Prepared first, then painted.",
         detail:
           "Filling, sanding and caulking is most of the work and all of the difference. Cut-in lines kept sharp, everything sheeted before a tin is opened, and the room put back and swept at the end of each day rather than at the end of the week.",
+      },
+      {
+        name: "Garden rooms and outbuildings",
+        icon: "cabin",
+        blurb: "Built on site, from the base up.",
+        detail:
+          "Base laid and levelled first, then framed, insulated, clad and roofed. Doors and windows set out across the elevation so the cladding lands evenly either side of them. Power and lighting run in by an electrician. If the size or the position means you need planning permission or building control, we will say so at quote stage rather than after the base is down.",
       },
       {
         name: "Fencing, decking and clearance",
@@ -311,68 +319,77 @@ export type WorkItem = {
   src?: string;
   alt?: string;
   detail: string;
-  /* Rendered as a wide tile in the mosaic. */
+  /* Rendered as a wide tile in the home mosaic. Ignored on the Work page,
+     which lays every job out as a full-width row. */
   wide?: boolean;
+  /* Shown in the home-page mosaic. The home hero already carries the green
+     kitchen, so that job is deliberately left out of the subset. */
+  onHome?: boolean;
 };
 
+/* Photographed jobs first. Where there is no photograph of our own the item
+   falls back to a measured drawing rather than borrowing a stock image. */
 export const WORK: WorkItem[] = [
+  {
+    subject: "Shaker kitchen and island",
+    note: "Building and renovation",
+    art: "kitchen",
+    src: "/work/kitchen-green.jpg",
+    alt: "A sage green shaker kitchen with a marble-topped island beneath a glazed lantern roof",
+    detail:
+      "Fitted under a new lantern roof, so the runs were set out to the light rather than to the old room. Island brought in as one piece and levelled before the worktop went on.",
+  },
+  {
+    subject: "Cedar-clad garden room",
+    note: "Outdoor building",
+    art: "gardenroom",
+    src: "/work/garden-room-cedar.jpg",
+    alt: "A timber-clad garden room with a flat roof and a run of anthracite bi-fold doors",
+    detail:
+      "Framed, clad and roofed on site. The bi-folds run the length of one elevation, so that wall was built plumb first and the frames set into a squared opening.",
+    wide: true,
+    onHome: true,
+  },
+  {
+    subject: "Handleless kitchen",
+    note: "Building and renovation",
+    art: "kitchen",
+    src: "/work/kitchen-dark.jpg",
+    alt: "A dark handleless kitchen in a U-shape with a stone worktop, range cooker and split-face stone wall",
+    detail:
+      "A U-shaped run with a range in the middle, so the two returns had to line through. Worktops cut and joined on site, and the stone wall built back to the corner.",
+    onHome: true,
+  },
   {
     subject: "Alcove shelving",
     note: "Bespoke joinery",
     art: "shelving",
-    src: "/work/shelving.jpg",
-    alt: "Built-in alcove shelving with oak shelves above painted cupboards",
     detail:
-      "Two recesses either side of a chimney breast, templated separately because they were not the same width. Cupboards below, open shelves above.",
+      "Recesses either side of a chimney breast are rarely the same width, so each one gets templated on its own. Cupboards below, open shelves above, scribed in.",
+    onHome: true,
+  },
+  {
+    subject: "Garden room, anthracite",
+    note: "Outdoor building",
+    art: "gardenroom",
+    src: "/work/garden-room-grey.jpg",
+    alt: "A dark grey clad garden room with French doors and side windows, set on a level base",
+    detail:
+      "Base laid and levelled before anything was framed. Doors and windows set out symmetrically across the front so the cladding boards land evenly either side.",
     wide: true,
-  },
-  {
-    subject: "Kitchen fit",
-    note: "Building and renovation",
-    art: "kitchen",
-    src: "/work/kitchen.jpg",
-    alt: "A fitted kitchen with wood-effect units and a stone worktop",
-    detail:
-      "Units levelled and locked together, worktop cut on site, splashback tiled and appliances fitted.",
-  },
-  {
-    subject: "Bathroom re-tile",
-    note: "Building and renovation",
-    art: "bathroom",
-    src: "/work/bathroom.jpg",
-    alt: "A re-tiled bathroom with grey metro tiles and a walk-in shower",
-    detail:
-      "Stripped back, re-boarded for a wet area, then tiled, grouted and sealed with the pipework boxed in.",
+    onHome: true,
   },
   {
     subject: "Wall panelling",
     note: "Bespoke joinery",
     art: "panelling",
-    src: "/work/panelling.jpg",
-    alt: "Timber wall panelling fitted around a corner",
     detail:
-      "Panel widths set out from the wall length so the spacing stays even as it turns the corner.",
-  },
-  {
-    subject: "Engineered flooring",
-    note: "Finishes",
-    art: "flooring",
-    src: "/work/flooring.jpg",
-    alt: "Engineered wood flooring being laid plank by plank",
-    detail:
-      "Subfloor levelled first, then boards laid with the correct expansion gap and matching trims.",
-  },
-  {
-    subject: "Decorating",
-    note: "Finishes",
-    art: "painting",
-    src: "/work/painting.jpg",
-    alt: "A wall being painted with a roller and sharp cut-in edges",
-    detail:
-      "Filled, sanded and caulked before any paint went on. That stage is most of the job.",
-    wide: true,
+      "Panel widths get worked backwards from the wall length so the spacing stays even and lands sensibly around sockets and door casings.",
   },
 ];
+
+/* The home page shows a subset and links through to the full gallery. */
+export const HOME_WORK = WORK.filter((w) => w.onHome);
 
 /* -------------------------------------------------------------------------- */
 /*  FAQs                                                                      */
