@@ -1,17 +1,35 @@
 # Real work photos go here
 
-The homepage "Recent work" gallery and the About photo are wired for real
-images but currently show **clearly-marked placeholder frames** (no stock, no
-fakery — per the build brief).
+Every image slot on the site is wired to a file in this folder. If a slot has no
+`src`, it falls back to an original measured-drawing illustration rather than
+stock photography — so the site never shows work that isn't FV's.
 
-## How to add the real photos
+## Files currently referenced
 
-1. Drop your photos into this folder, e.g. `alcove-shelving.jpg`,
-   `kitchen-fit.jpg`, etc. (JPG or WebP, roughly 4:3, ~1600px on the long edge).
-2. Open `app/page.tsx` and find the `WORK` array (Recent work) and the About
-   `WorkPhoto`.
-3. Add a `src` (e.g. `src: "/work/alcove-shelving.jpg"`) and write real `alt`
-   text describing what the photo actually shows.
+| File            | Where it appears                       |
+| --------------- | -------------------------------------- |
+| `hero.jpg`      | Home hero (portrait, ~4:5)             |
+| `band.jpg`      | Home "Measured twice" band (wide)      |
+| `about.jpg`     | About page portrait (~4:3)             |
+| `shelving.jpg`  | Work gallery — fitted alcove shelving  |
+| `kitchen.jpg`   | Work gallery — kitchen installation    |
+| `bathroom.jpg`  | Work gallery — bathroom re-tile        |
+| `panelling.jpg` | Work gallery — wood wall panelling     |
+| `flooring.jpg`  | Work gallery — new flooring            |
+| `painting.jpg`  | Work gallery — painting & decorating   |
 
-That's it — each slot swaps from placeholder frame to a real `next/image`
-automatically once it has a `src`. No layout changes needed.
+## How to swap or add photos
+
+1. Drop the photo into this folder (JPG or WebP, roughly 4:3, ~1600px on the
+   long edge). Overwrite an existing filename to replace that slot.
+2. To add a **new** gallery item, open `app/site.ts` and add an entry to the
+   `WORK` array with `src`, real `alt` text, a `subject`, a `note` badge and a
+   one-line `detail`.
+
+`app/site.ts` is the single source of truth for gallery content — the home page
+shows the first three entries, the Work page shows them all.
+
+## Alt text
+
+Write what the photo actually shows, not a keyword list. It's read aloud by
+screen readers and shown if the image fails to load.

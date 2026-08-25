@@ -15,12 +15,16 @@
   --color-brass: var(--color-accent);
   --color-brass-strong: var(--color-accent-strong);
   --color-brass-hi: var(--color-accent-hi);
-  --color-forest: var(--color-accent-2);
+  --color-slate: var(--color-accent-2);
   --color-hairline: var(--color-hairline);
 
-  --font-display: var(--font-zilla), Georgia, "Times New Roman", serif;
+  --font-display: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
   --font-body: var(--font-work), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-work), ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-card: var(--shadow-md);
+  --shadow-lift: var(--shadow-lg);
+  --shadow-deep: var(--shadow-xl);
 }
 
 /* ==========================================================================
@@ -55,8 +59,10 @@ body {
   left: 0.5rem;
   z-index: 95;
   transform: translateY(-160%);
-  background: var(--color-accent);
+  /* Ink rather than orange: white-on-orange only reaches 3.4:1, ink gives 16.5:1. */
+  background: var(--color-ink);
   color: #fff;
+  box-shadow: 0 0 0 2px var(--color-accent);
   font-weight: 600;
   font-size: 0.85rem;
   padding: 0.7rem 1rem;
@@ -65,6 +71,12 @@ body {
 }
 .skip-link:focus-visible {
   transform: translateY(0);
+}
+
+/* Display type wants to be tight and confident — the logo wordmark is
+   geometric and close-set, so headings track in rather than out. */
+.font-display {
+  letter-spacing: -0.025em;
 }
 
 /* ==========================================================================
@@ -91,135 +103,126 @@ html.lenis body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.55rem;
-  height: 3.5rem;
-  padding-inline: 1.75rem;
-  border-radius: 0.65rem;
+  gap: 0.6rem;
+  height: 3.25rem;
+  padding-inline: 1.6rem;
+  border-radius: 0.4rem;
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 1.075rem;
+  font-size: 0.98rem;
   line-height: 1;
-  letter-spacing: 0.005em;
+  letter-spacing: -0.005em;
   white-space: nowrap;
   transition: background-color 0.22s ease, color 0.22s ease,
-    box-shadow 0.28s ease, transform 0.15s ease;
+    box-shadow 0.28s ease, transform 0.18s cubic-bezier(0.22, 0.7, 0.2, 1);
 }
 .btn:active {
   transform: translateY(1px);
 }
 .btn-sm {
-  height: 2.75rem;
+  height: 2.6rem;
   padding-inline: 1rem;
-  font-size: 0.95rem;
-  border-radius: 0.55rem;
+  font-size: 0.88rem;
+  border-radius: 0.35rem;
 }
-/* Primary on LIGHT sections — graphite, white text */
+/* Primary on LIGHT sections — near-black, white text (16.5:1) */
 .btn-primary {
   background: var(--color-ink);
   color: #fff;
+  box-shadow: var(--shadow-sm);
 }
 .btn-primary:hover {
   background: var(--color-ink-soft);
-  box-shadow: 0 16px 34px -18px rgba(0, 0, 0, 0.6);
+  box-shadow: var(--shadow-md);
 }
-/* Primary on DARK sections — light bronze, ink text */
+/* The brand CTA — solid logo orange with near-black text (4.86:1). The vivid
+   orange only clears AA against ink, never against white, so the label is ink. */
 .btn-accent {
-  background: var(--color-accent-hi);
+  background: var(--color-accent);
   color: var(--color-ink);
 }
 .btn-accent:hover {
-  background: #e2c286;
-  box-shadow: 0 16px 32px -16px rgba(0, 0, 0, 0.5);
+  background: color-mix(in srgb, var(--color-accent) 88%, #000);
 }
 /* Ghost on light */
 .btn-ghost {
   background: transparent;
   color: var(--color-ink);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-ink) 22%, transparent);
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--color-ink) 18%, transparent);
 }
 .btn-ghost:hover {
-  color: var(--color-accent-strong);
-  box-shadow: inset 0 0 0 1px var(--color-accent);
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--color-ink) 45%, transparent);
 }
 /* Ghost on dark */
 .btn-ghost-light {
   background: transparent;
-  color: var(--color-bg);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, #fff 28%, transparent);
+  color: #fff;
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, #fff 26%, transparent);
 }
 .btn-ghost-light:hover {
-  color: var(--color-accent-hi);
-  box-shadow: inset 0 0 0 1px var(--color-accent-hi);
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, #fff 60%, transparent);
 }
 
 /* ==========================================================================
-   Signature — measurement tick-marks (folding-rule / tape edge)
+   Surfaces
    ========================================================================== */
-.tick-rule {
-  height: 14px;
-  width: 100%;
-  background-image: repeating-linear-gradient(
-      90deg,
-      var(--color-accent) 0 1px,
-      transparent 1px 8px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      var(--color-accent) 0 1.5px,
-      transparent 1.5px 40px
-    );
-  background-size: 100% 7px, 100% 13px;
-  background-position: left bottom, left bottom;
-  background-repeat: repeat-x;
-  opacity: 0.5;
+/* Shared card behaviour: a restrained lift and a slightly firmer edge. */
+.card {
+  border: 1px solid var(--color-hairline);
+  background: var(--color-surface);
+  border-radius: 0.5rem;
+  transition: transform 0.4s cubic-bezier(0.22, 0.7, 0.2, 1),
+    box-shadow 0.4s ease, border-color 0.4s ease;
 }
-.tick-rule-hi {
-  background-image: repeating-linear-gradient(
-      90deg,
-      var(--color-accent-hi) 0 1px,
-      transparent 1px 8px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      var(--color-accent-hi) 0 1.5px,
-      transparent 1.5px 40px
-    );
+.card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--color-ink) 22%, transparent);
+  box-shadow: var(--shadow-md);
 }
-.tick-mark {
-  display: inline-block;
-  width: 26px;
-  height: 10px;
-  background-image: repeating-linear-gradient(
-    90deg,
-    currentColor 0 1px,
-    transparent 1px 6px
-  );
-  background-position: left bottom;
-  background-repeat: repeat-x;
-  background-size: 100% 6px;
+.card-dark {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 0.5rem;
+  transition: background-color 0.4s ease, border-color 0.4s ease;
 }
-/* Vertical ruler for the margin tape-rail */
-.tape-v {
-  background-image: repeating-linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--color-accent) 40%, transparent) 0 1px,
-      transparent 1px 10px
-    ),
-    repeating-linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--color-accent) 70%, transparent) 0 1.5px,
-      transparent 1.5px 50px
-    );
-  background-size: 7px 100%, 12px 100%;
-  background-position: left top, left top;
-  background-repeat: repeat-y;
+.card-dark:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+/* ==========================================================================
+   Form controls — native select needs its arrow drawn back in once appearance
+   is reset, and it must inherit the same field styling as inputs.
+   ========================================================================== */
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2356534e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  background-size: 1.15rem;
+  padding-right: 2.75rem;
+}
+
+/* Native disclosure marker is replaced by our own +/x control. */
+summary::-webkit-details-marker {
+  display: none;
+}
+
+/* ==========================================================================
+   Typography niceties
+   ========================================================================== */
+.text-balance {
+  text-wrap: balance;
+}
+.text-pretty {
+  text-wrap: pretty;
 }
 
 /* Premium depth — faint grain for dark sections (decorative) */
 .grain {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 180px 180px;
-  opacity: 0.04;
+  opacity: 0.03;
   mix-blend-mode: overlay;
 }
 

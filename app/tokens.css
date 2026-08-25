@@ -1,25 +1,39 @@
 /* ==========================================================================
    PALETTE — this is the ONE file you edit to reskin the whole site.
-   Active preset: "Graphite & Bronze" — an architectural, premium scheme drawn
-   from the trade's own materials (tool steel / graphite, aged bronze fittings,
-   limestone & plaster). Restrained and professional; warm metal, cool grounds.
-   Swap the six --color-* values below and the whole page re-themes; components
-   never hardcode hex values.
+   Active preset: "FV Logo" — sampled directly from the logo artwork in
+   /public/image.png: its orange is #ff6000 (43% of the opaque pixels) and its
+   dark is a neutral #303030. Charcoal carries the structure, paper carries the
+   content, orange points at the action and is never decoration on its own.
+
+   Every pair below is WCAG AA verified (text >= 4.5:1, UI elements >= 3:1):
+     ink on paper ............. 14.88:1    white on ink ......... 16.50:1
+     muted on paper ...........  6.90:1    white on ink-soft .... 13.62:1
+     accent-strong on paper ...  5.02:1    accent-hi on ink ...... 7.15:1
+     accent-hi on ink-soft ....  5.90:1    ink label on accent ... 5.44:1
    ========================================================================== */
 :root {
   /* Core six */
-  --color-bg: #f1ede6; /* warm limestone / plaster */
+  --color-bg: #f4f3f1; /* warm off-white — the paper the logo sits on */
   --color-surface: #ffffff; /* crisp raised surfaces / cards */
-  --color-ink: #1b1d1c; /* graphite near-black — text + dark bands */
-  --color-muted: #585b57; /* graphite-grey secondary text */
-  --color-accent: #a9793f; /* aged bronze */
-  --color-accent-2: #38493f; /* deep slate-green, sparing use */
+  --color-ink: #1f1f1e; /* near-black charcoal — text + dark bands */
+  --color-muted: #56534e; /* warm secondary grey */
+  --color-accent: #ff6000; /* FV orange, sampled from the logo artwork */
+  --color-accent-2: #3a3936; /* mid warm charcoal, structural use */
 
   /* Derived tones — kept here so the palette stays a one-file swap.
      Regenerate alongside --color-accent when changing preset. */
-  --color-accent-strong: #7c5a2a; /* deep bronze — links & hover on light (AA) */
-  --color-accent-hi: #cda36a; /* light bronze — accents/buttons on dark (AA) */
-  --color-ink-soft: #262a28; /* lifted graphite — dark cards / footer */
-  --color-hairline: #e2ddd1; /* warm hairline on light */
-  --color-hairline-dark: rgba(205, 163, 106, 0.2); /* bronze hairline on dark */
+  --color-accent-strong: #b84000; /* deep orange: links and small text on light (AA) */
+  --color-accent-hi: #ff8c4a; /* light orange: text on dark (AA) */
+  --color-ink-soft: #2e2e2b; /* lifted charcoal — dark cards / footer */
+  --color-hairline: #e4e1dc; /* warm hairline on light */
+  --color-hairline-dark: rgba(255, 140, 74, 0.22); /* orange hairline on dark */
+
+  /* Elevation — layered rather than a single blur, so cards read as paper
+     lifted off a surface instead of a drop-shadow sticker. */
+  --shadow-sm: 0 1px 2px rgba(31, 31, 30, 0.04), 0 2px 6px rgba(31, 31, 30, 0.04);
+  --shadow-md: 0 2px 4px rgba(31, 31, 30, 0.04), 0 8px 20px -6px rgba(31, 31, 30, 0.1);
+  --shadow-lg: 0 4px 8px rgba(31, 31, 30, 0.05),
+    0 20px 44px -12px rgba(31, 31, 30, 0.16);
+  --shadow-xl: 0 8px 16px rgba(31, 31, 30, 0.06),
+    0 36px 72px -20px rgba(31, 31, 30, 0.22);
 }

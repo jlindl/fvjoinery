@@ -2,7 +2,7 @@
 
 import { motion, useScroll, useSpring } from "framer-motion";
 
-/** Slim brass progress bar pinned to the top of the viewport. */
+/** Hairline scroll indicator pinned to the top of the viewport. */
 export default function ScrollProgress() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -15,7 +15,7 @@ export default function ScrollProgress() {
     <motion.div
       aria-hidden="true"
       style={{ scaleX }}
-      className="fixed inset-x-0 top-0 z-[60] h-[3px] origin-left bg-brass"
+      className="fixed inset-x-0 top-0 z-[60] h-[2px] origin-left bg-brass"
     />
   );
 }

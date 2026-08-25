@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { BUSINESS, SERVICE_GROUPS } from "./site";
 
 const labelClass =
   "block text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-muted";
 const fieldClass =
-  "mt-2 w-full rounded-md border border-hairline bg-paper px-4 py-3 text-base text-ink placeholder:text-muted/60 transition-colors focus-visible:border-brass focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass";
+  "mt-2 w-full rounded-md border border-hairline bg-surface px-4 py-3 text-base text-ink placeholder:text-muted/60 transition-colors focus-visible:border-brass focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass";
 
 export default function QuoteForm() {
   const [sent, setSent] = useState(false);
@@ -13,9 +14,9 @@ export default function QuoteForm() {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.currentTarget).entries());
-    // TODO: wire to <provider> (e.g. Formspree, Resend, or a /api route).
-    // UI-only for now — no submission endpoint is configured.
-    console.log("F&V quote request (not yet sent anywhere):", data);
+    // TODO: wire to a provider (e.g. Formspree, Resend, or a route handler).
+    // UI-only for now: no submission endpoint is configured.
+    console.log("FV quote request (not yet sent anywhere):", data);
     setSent(true);
     e.currentTarget.reset();
   }
@@ -70,15 +71,33 @@ export default function QuoteForm() {
       </div>
 
       <div>
+        <label htmlFor="service" className={labelClass}>
+          Type of work
+        </label>
+        <select id="service" name="service" className={fieldClass} defaultValue="">
+          <option value="">Not sure yet / something else</option>
+          {SERVICE_GROUPS.map((g) => (
+            <optgroup key={g.id} label={g.title}>
+              {g.items.map((s) => (
+                <option key={s.name} value={s.name}>
+                  {s.name}
+                </option>
+              ))}
+            </optgroup>
+          ))}
+        </select>
+      </div>
+
+      <div>
         <label htmlFor="message" className={labelClass}>
-          What needs doing?
+          Tell us about the job
         </label>
         <textarea
           id="message"
           name="message"
           required
           rows={4}
-          placeholder="e.g. Back door won't shut properly and needs re-hanging."
+          placeholder="e.g. Two alcoves either side of the chimney breast. Cupboards below, open shelves above. Roughly 900mm wide each."
           className={`${fieldClass} resize-y`}
         />
       </div>
@@ -93,19 +112,24 @@ export default function QuoteForm() {
         </span>
       </button>
 
+      <p className="text-[0.78rem] leading-relaxed text-muted">
+        We only use your details to reply about this enquiry. They are not
+        passed to anyone else.
+      </p>
+
       {sent && (
         <p
           role="status"
-          className="rounded-md border border-forest/30 bg-forest/10 px-4 py-3 text-sm text-ink"
+          className="rounded-md border border-brass/40 bg-brass/10 px-4 py-3 text-sm text-ink"
         >
-          Thanks — your details are ready to go. For anything urgent, call{" "}
+          Thanks. Your details are ready to go. For anything urgent, call{" "}
           <a
-            href="tel:+447447907472"
-            className="font-semibold text-brass underline underline-offset-2"
+            href={BUSINESS.phoneHref}
+            className="font-semibold text-brass-strong underline underline-offset-2"
           >
-            07447 907472
-          </a>{" "}
-          — we&apos;re open 24/7.
+            {BUSINESS.phoneDisplay}
+          </a>
+          .
         </p>
       )}
     </form>

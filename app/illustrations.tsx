@@ -1,17 +1,20 @@
 /* ==========================================================================
    Illustrations — original "measured drawing" artwork used in the image slots
-   until F&V supply real photos. Bronze + graphite technical elevations of the
-   actual jobs, so the page reads as F&V's own visual language (not stock).
-   Palette hexes are hard-coded here because these are art assets; the rest of
-   the site still themes from tokens.css.
+   until FV supply real photos. Orange + slate technical elevations of the
+   actual jobs, so the page reads as FV's own visual language (not stock).
+   Colours resolve from tokens.css via CSS custom properties, so these re-theme
+   with the rest of the site — tokens.css stays the single palette file.
    ========================================================================== */
 import type { ReactNode } from "react";
 
-const INK = "#1b1d1c";
-const ACC = "#a9793f";
-const ACCS = "#7c5a2a";
-const HAIR = "#d6cfbf";
-const BRASSHI = "#cda36a";
+const INK = "var(--color-ink)";
+const ACC = "var(--color-accent)";
+const ACCS = "var(--color-accent-strong)";
+const HAIR = "var(--color-hairline)";
+const BRASSHI = "var(--color-accent-hi)";
+const PAPER = "var(--color-bg)";
+const SURFACE = "var(--color-surface)";
+const INKSOFT = "var(--color-ink-soft)";
 
 export type IllustrationVariant =
   | "kitchen"
@@ -36,7 +39,7 @@ function DimH({ x1, x2, y, label }: { x1: number; x2: number; y: number; label: 
         y={y - 8}
         width={36}
         height={16}
-        fill="#f1ede6"
+        fill={PAPER}
         stroke="none"
       />
       <text
@@ -77,7 +80,7 @@ function TitleBlock({ index, label }: { index: string; label: string }) {
         opacity={0.45}
         letterSpacing="1.4"
       >
-        F&amp;V · SCALE 1:20
+        FV · SCALE 1:20
       </text>
     </g>
   );
@@ -102,8 +105,8 @@ function Sheet({
     >
       <defs>
         <linearGradient id="pg" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#f6f3ed" />
-          <stop offset="1" stopColor="#e8e2d5" />
+          <stop offset="0" stopColor={SURFACE} />
+          <stop offset="1" stopColor={HAIR} />
         </linearGradient>
         <pattern id="grid" width="22" height="22" patternUnits="userSpaceOnUse">
           <path d="M22 0H0V22" fill="none" stroke={HAIR} strokeWidth="0.6" opacity="0.5" />
@@ -136,7 +139,7 @@ export function Illustration({
   if (variant === "band") return <TimberBand />;
 
   const stroke = { stroke: INK, strokeWidth: 2, fill: "none" as const };
-  const accFill = "rgba(169,121,63,0.14)";
+  const accFill = "color-mix(in srgb, var(--color-accent) 14%, transparent)";
 
   const motif: Record<Exclude<IllustrationVariant, "band">, ReactNode> = {
     kitchen: (
@@ -288,11 +291,11 @@ function TimberBand() {
     >
       <defs>
         <linearGradient id="tg" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#20241f" />
-          <stop offset="1" stopColor="#15181500" />
+          <stop offset="0" stopColor={INKSOFT} />
+          <stop offset="1" stopColor="transparent" />
         </linearGradient>
       </defs>
-      <rect width="400" height="300" fill="#191c18" />
+      <rect width="400" height="300" fill={INK} />
       <rect width="400" height="300" fill="url(#tg)" />
       {/* long grain */}
       {lines.map((_, i) => {

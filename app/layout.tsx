@@ -1,14 +1,20 @@
 import type { Metadata, Viewport } from "next";
-import { Zilla_Slab, Work_Sans } from "next/font/google";
+import { Archivo, Work_Sans } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "./smooth-scroll";
 import ScrollProgress from "./scroll-progress";
-import TapeRail from "./tape-rail";
+import SiteHeader from "./site-header";
+import SiteFooter from "./site-footer";
+import CallBar from "./call-bar";
+import { ALL_SERVICES, AREAS, BUSINESS } from "./site";
 
-const zilla = Zilla_Slab({
+/* Archivo replaces the previous slab serif: the logo wordmark is a close-set
+   geometric sans, and a slab fought it. Variable weight so headings can run to
+   800 without loading extra files. */
+const archivo = Archivo({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-zilla",
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-archivo",
   display: "swap",
 });
 
@@ -19,34 +25,65 @@ const workSans = Work_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "F&V Handyman Services | Nottingham Handyman & Joinery — Open 24/7",
+  title: {
+    default: `${BUSINESS.name} | Joiners & Builders in ${BUSINESS.base}`,
+    template: `%s | ${BUSINESS.shortName}`,
+  },
   description:
-    "Honest handyman and joinery work in Nottingham and nationwide. Door fitting, carpentry, painting, flooring, tiling, kitchens, bathrooms, bespoke made-to-measure joinery and more. Open 24/7, free consultation, cash and cards accepted. No job too small.",
+    "Fitted joinery and building work across Leicestershire and the Midlands. Alcove units, wall panelling, kitchens, bathrooms, renovations and finishes. Free itemised quotes, Checkatrade listed.",
   keywords: [
-    "handyman Nottingham",
-    "carpenter Nottingham",
-    "bespoke joinery Nottingham",
-    "kitchen fitting",
-    "bathroom fitting",
-    "tiling",
-    "flooring",
-    "painting and decorating",
-    "door fitting",
-    "24/7 handyman",
+    "joiner Leicestershire",
+    "carpenter Leicester",
+    "bespoke joinery Leicestershire",
+    "building solutions Midlands",
+    "kitchen fitting Leicester",
+    "bathroom installation Leicestershire",
+    "fitted wardrobes Leicester",
+    "wall panelling Leicestershire",
+    "renovation Midlands",
+    "FV Joinery",
   ],
   openGraph: {
-    title: "F&V Handyman Services — Nottingham handyman & joinery, open 24/7",
+    title: `${BUSINESS.name} | Joinery and building, ${BUSINESS.base}`,
     description:
-      "Fix it, fit it or build it. Fair prices, real craftsmanship, and we keep you posted at every step. Free consultation. No job too small.",
+      "Fitted joinery, building and renovation across Leicestershire and the Midlands. Free itemised quotes, and a team that finishes the last ten per cent.",
     type: "website",
     locale: "en_GB",
-    siteName: "F&V Handyman Services",
+    siteName: BUSINESS.name,
   },
   robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#8b5a2b",
+  themeColor: "#1f1f1e",
+};
+
+/* Structured data: one business record for the whole site. */
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",
+  name: BUSINESS.name,
+  description:
+    "Fitted joinery and building work covering Leicestershire and the East and West Midlands. Alcove units, panelling, kitchens, bathrooms, renovations, flooring and finishes.",
+  telephone: BUSINESS.phoneRaw,
+  email: BUSINESS.email,
+  areaServed: AREAS.map((a) => ({ "@type": "City", name: a })),
+  address: {
+    "@type": "PostalAddress",
+    addressRegion: BUSINESS.base,
+    addressCountry: "GB",
+  },
+  sameAs: [BUSINESS.instagram, BUSINESS.checkatrade],
+  paymentAccepted: "Cash, Debit Card, Credit Card",
+  priceRange: "££",
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Joinery and building services",
+    itemListElement: ALL_SERVICES.map((s) => ({
+      "@type": "Offer",
+      itemOffered: { "@type": "Service", name: s.name },
+    })),
+  },
 };
 
 export default function RootLayout({
@@ -57,16 +94,24 @@ export default function RootLayout({
   return (
     <html
       lang="en-GB"
-      className={`${zilla.variable} ${workSans.variable} h-full antialiased`}
+      className={`${archivo.variable} ${workSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-paper font-body text-ink">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <a href="#main" className="skip-link">
           Skip to content
         </a>
         <SmoothScroll />
         <ScrollProgress />
-        <TapeRail />
-        {children}
+        <SiteHeader />
+        <main id="main" className="flex-1">
+          {children}
+        </main>
+        <SiteFooter />
+        <CallBar />
       </body>
     </html>
   );
