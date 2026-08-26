@@ -179,10 +179,9 @@ export default function AboutPage() {
       <section className="relative h-[55vh] min-h-[360px] overflow-hidden bg-ink">
         <Photo
           item={{
-            subject: "Timber grain",
-            /* The measured-drawing sheets are drawn on a 400x300 viewBox and
-               slice-crop badly into a band this wide. "band" is the variant
-               built to be cropped, so it is the only one that belongs here. */
+            subject: "Handleless kitchen",
+            src: "/work/kitchen-dark.jpg",
+            alt: "A dark handleless kitchen with a stone worktop and a range cooker",
             art: <Illustration variant="band" />,
           }}
           sizes="100vw"

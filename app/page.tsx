@@ -165,14 +165,11 @@ export default function Home() {
                   className={`lg:col-span-5 ${gi % 2 === 1 ? "lg:order-2" : ""}`}
                 >
                   <div className="lg:sticky lg:top-28">
-                    <ImageReveal className="relative aspect-[4/3] overflow-hidden rounded-md lg:aspect-[3/4]">
+                    <ImageReveal className="relative aspect-[4/5] overflow-hidden rounded-md lg:aspect-[3/4]">
                       <Photo
                         item={{
                           subject: group.title,
-                          /* Deliberately no photo: the home page already carries
-                             three down this scroll, and the measured drawings
-                             give the middle of the page a change of texture.
-                             The Services page shows the photographs. */
+                          src: group.image,
                           alt: group.imageAlt,
                           art: (
                             <Illustration

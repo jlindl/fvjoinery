@@ -104,7 +104,9 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
     caption: "Built to the opening you have",
     summary:
       "Made-to-measure work for spaces that no standard unit will fit. Templated on site, built to those exact dimensions, scribed in so the joints close.",
-    /* No photograph of our own joinery yet, so the measured drawing stands. */
+    image: "/work/doors-black.jpg",
+    imageAlt:
+      "Three doors in a dark finish hung off a landing, with white architrave",
     art: "shelving",
     items: [
       {
@@ -143,9 +145,9 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
     caption: "The structural side of a project",
     summary:
       "Rooms taken back to brick and rebuilt. We handle the sequence so trades turn up in the right order and the job does not stall halfway.",
-    image: "/work/kitchen-dark.jpg",
+    image: "/work/bathroom.jpg",
     imageAlt:
-      "A dark handleless kitchen with a stone worktop and a range cooker",
+      "A finished bathroom with grey marble-effect tiling and a shower bath",
     art: "kitchen",
     items: [
       {
@@ -184,9 +186,9 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
     caption: "The last ten per cent, and the garden",
     summary:
       "The stage that decides how the whole job reads. Plus the work outside: garden rooms, fencing, decking and clearance.",
-    image: "/work/garden-room-cedar.jpg",
+    image: "/work/decking.jpg",
     imageAlt:
-      "A timber-clad garden room with a flat roof and a run of bi-fold doors",
+      "Grey composite decking laid up to the doors of a cedar-clad garden room",
     art: "gardenroom",
     items: [
       {
@@ -315,6 +317,8 @@ export const MATERIALS = [
 export type WorkItem = {
   subject: string;
   note: string;
+  /* Fallback drawing if a photo is ever removed. Nothing on the site renders
+     one today: every entry below carries a real photograph. */
   art: IllustrationVariant;
   src?: string;
   alt?: string;
@@ -322,13 +326,13 @@ export type WorkItem = {
   /* Rendered as a wide tile in the home mosaic. Ignored on the Work page,
      which lays every job out as a full-width row. */
   wide?: boolean;
-  /* Shown in the home-page mosaic. The home hero already carries the green
-     kitchen, so that job is deliberately left out of the subset. */
+  /* Shown in the home-page mosaic. The four flagged here are the four photos
+     that appear nowhere else on the home page, so nothing repeats down it. */
   onHome?: boolean;
 };
 
-/* Photographed jobs first. Where there is no photograph of our own the item
-   falls back to a measured drawing rather than borrowing a stock image. */
+/* Every entry is a photograph of our own work. The Work page renders these as
+   3:2 rows, so a photo only belongs here if it survives that crop. */
 export const WORK: WorkItem[] = [
   {
     subject: "Shaker kitchen and island",
@@ -361,12 +365,32 @@ export const WORK: WorkItem[] = [
     onHome: true,
   },
   {
-    subject: "Alcove shelving",
+    subject: "Internal doors and architrave",
     note: "Bespoke joinery",
-    art: "shelving",
+    art: "door",
+    src: "/work/doors-oak.jpg",
+    alt: "Three oak cottage doors hung off a landing, with white architrave and wood-effect flooring",
     detail:
-      "Recesses either side of a chimney breast are rarely the same width, so each one gets templated on its own. Cupboards below, open shelves above, scribed in.",
+      "Three doors off one landing, so the gaps had to match each other as well as their own frames. Hinges chiselled in flush, architrave mitred to the angles the openings actually were.",
     onHome: true,
+  },
+  {
+    subject: "Bathroom installation",
+    note: "Building and renovation",
+    art: "bathroom",
+    src: "/work/bathroom.jpg",
+    alt: "A finished bathroom with grey marble-effect tiling, a shower bath with a glass screen and a WC",
+    detail:
+      "Stripped out and re-boarded for a wet area before a tile went up. Bath, screen and WC set out around the window so the joints run past it evenly.",
+  },
+  {
+    subject: "Composite decking",
+    note: "Finishes and outdoor",
+    art: "gardenroom",
+    src: "/work/decking.jpg",
+    alt: "Grey composite decking laid up to the doors of a cedar-clad garden room",
+    detail:
+      "Framed at the bearer spacing the boards needed, with airflow left underneath. Set to fall away from the building so water never sits against the cladding.",
   },
   {
     subject: "Garden room, anthracite",
@@ -378,13 +402,6 @@ export const WORK: WorkItem[] = [
       "Base laid and levelled before anything was framed. Doors and windows set out symmetrically across the front so the cladding boards land evenly either side.",
     wide: true,
     onHome: true,
-  },
-  {
-    subject: "Wall panelling",
-    note: "Bespoke joinery",
-    art: "panelling",
-    detail:
-      "Panel widths get worked backwards from the wall length so the spacing stays even and lands sensibly around sockets and door casings.",
   },
 ];
 

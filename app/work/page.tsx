@@ -49,7 +49,7 @@ export default function WorkPage() {
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <SectionHeading
             eyebrow="Project gallery"
-            title="Six jobs, and what"
+            title="Seven jobs, and what"
             accent="each one involved."
           />
 

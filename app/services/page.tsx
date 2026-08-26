@@ -75,7 +75,7 @@ export default function ServicesPage() {
                   </Reveal>
                   <ImageReveal
                     delay={0.1}
-                    className="relative mt-8 aspect-[4/3] overflow-hidden rounded-md"
+                    className="relative mt-8 aspect-[4/5] overflow-hidden rounded-md sm:aspect-[3/4]"
                   >
                     <Photo
                       item={{
