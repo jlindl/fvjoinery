@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import QuoteForm from "../quote-form";
 import { Reveal, Stagger, StaggerItem } from "../motion";
 import ProcessJourney from "../process-journey";
-import { AREAS, BUSINESS, FAQS, PROCESS } from "../site";
+import { AREAS, BUSINESS, FAQS, PROCESS, WHATSAPP_HREF } from "../site";
 import {
   Eyebrow,
   InstagramGlyph,
@@ -10,6 +10,8 @@ import {
   PageHero,
   PhoneGlyph,
   SectionHeading,
+  TikTokGlyph,
+  WhatsAppGlyph,
 } from "../ui";
 
 export const metadata: Metadata = {
@@ -72,8 +74,29 @@ export default function ContactPage() {
                 </a>
               </Reveal>
 
+              <Reveal delay={0.18}>
+                <a
+                  href={WHATSAPP_HREF}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="card mt-4 flex items-center gap-4 p-5"
+                >
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md bg-ink text-white">
+                    <WhatsAppGlyph className="h-5 w-5" />
+                  </span>
+                  <span>
+                    <span className="block text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">
+                      WhatsApp
+                    </span>
+                    <span className="block font-display text-lg font-semibold tracking-tight text-ink">
+                      Send photos and sizes
+                    </span>
+                  </span>
+                </a>
+              </Reveal>
+
               <Reveal delay={0.2}>
-                <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   <a
                     href={`mailto:${BUSINESS.email}`}
                     className="card flex items-start gap-3 p-5"
@@ -99,8 +122,24 @@ export default function ContactPage() {
                       <span className="block text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">
                         Instagram
                       </span>
-                      <span className="mt-0.5 block text-sm font-medium text-ink">
+                      <span className="mt-0.5 block break-all text-sm font-medium text-ink">
                         {BUSINESS.instagramHandle}
+                      </span>
+                    </span>
+                  </a>
+                  <a
+                    href={BUSINESS.tiktok}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="card flex items-start gap-3 p-5"
+                  >
+                    <TikTokGlyph className="mt-0.5 h-5 w-5 shrink-0 text-muted" />
+                    <span>
+                      <span className="block text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">
+                        TikTok
+                      </span>
+                      <span className="mt-0.5 block break-all text-sm font-medium text-ink">
+                        {BUSINESS.tiktokHandle}
                       </span>
                     </span>
                   </a>

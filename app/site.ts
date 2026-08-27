@@ -21,11 +21,27 @@ export const BUSINESS = {
   phoneDisplay: "07447 907472",
   phoneHref: "tel:+447447907472",
   phoneRaw: "+447447907472",
+  /* wa.me wants the number in full international form with no plus or spaces. */
+  whatsappNumber: "447447907472",
   email: "infofyvhandyman19@gmail.com",
   instagram: "https://www.instagram.com/fv_joinery_building",
   instagramHandle: "@fv_joinery_building",
+  tiktok: "https://www.tiktok.com/@fvjoneryandbuilding",
+  tiktokHandle: "@fvjoneryandbuilding",
   checkatrade: "https://www.checkatrade.com/trades/fvjoineryandbuildingsolutions",
+  /* TODO: swap for the real Google Business Profile share link (Google Maps >
+     the business > Share). This Maps search finds the business and works, but
+     a profile link is what you want on a "read our reviews" button. */
+  google:
+    "https://www.google.com/maps/search/?api=1&query=FV+Joinery+and+Building+Solutions+Leicestershire",
 } as const;
+
+/* The quote buttons open WhatsApp with this already typed, so the customer
+   only has to describe the job. Keep the trailing colon: it prompts them to
+   carry on rather than sending a bare greeting. */
+export const WHATSAPP_TEXT = "Hi FV Joinery, I'd like a quote. The job is:";
+
+export const WHATSAPP_HREF = `https://wa.me/${BUSINESS.whatsappNumber}?text=${encodeURIComponent(WHATSAPP_TEXT)}`;
 
 export const AREAS = [
   "Leicester",
@@ -147,7 +163,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
       "Rooms taken back to brick and rebuilt. We handle the sequence so trades turn up in the right order and the job does not stall halfway.",
     image: "/work/bathroom.jpg",
     imageAlt:
-      "A finished bathroom with grey marble-effect tiling and a shower bath",
+      "A loft bathroom with patterned floor tiles and a metro-tiled walk-in shower",
     art: "kitchen",
     items: [
       {
@@ -379,9 +395,9 @@ export const WORK: WorkItem[] = [
     note: "Building and renovation",
     art: "bathroom",
     src: "/work/bathroom.jpg",
-    alt: "A finished bathroom with grey marble-effect tiling, a shower bath with a glass screen and a WC",
+    alt: "A loft bathroom with patterned floor tiles, a metro-tiled walk-in shower, a green vanity unit and a bespoke door into the eaves",
     detail:
-      "Stripped out and re-boarded for a wet area before a tile went up. Bath, screen and WC set out around the window so the joints run past it evenly.",
+      "A room with a sloping ceiling, so the shower went where the headroom was. Patterned floor set out from the centre line to keep the cuts equal at both walls, and the eaves cupboard door made to match the vanity.",
   },
   {
     subject: "Composite decking",
@@ -447,12 +463,162 @@ export const FAQS = [
 /*  From FV's Checkatrade profile. Verify wording against the live profile    */
 /*  before launch, and add new ones here as they come in.                     */
 /* -------------------------------------------------------------------------- */
-export const REVIEWS = [
+/*  Reviews                                                                   */
+/*                                                                            */
+/*  ONLY real, published reviews go in this array. Never write one, never      */
+/*  paraphrase one into something snappier, and never pad the list to make the */
+/*  section look fuller. Publishing an invented testimonial is illegal in the  */
+/*  UK (Digital Markets, Competition and Consumers Act 2024) and Google        */
+/*  delists businesses for it.                                                */
+/*                                                                            */
+/*  To add one: open the review, copy the text exactly as written, and fill    */
+/*  in every field below. `source` decides the label and which profile it      */
+/*  links to.                                                                 */
+/*                                                                            */
+/*  The nine below are verbatim from Google. Reviews whose text was cut off    */
+/*  with "...More" were left out rather than completed from guesswork, so      */
+/*  there are more on the profile than are shown here.                        */
+/*                                                                            */
+/*  `rating` is out of 5 and is deliberately unset: the star counts were not   */
+/*  to hand when these were transcribed, and a star row is a factual claim.    */
+/*  Fill it in per review and the stars appear on their own.                  */
+/* -------------------------------------------------------------------------- */
+export type ReviewSource = "Google" | "Checkatrade";
+
+export type Review = {
+  quote: string;
+  name: string;
+  /* What the job was, in a few words. Shown under the name. */
+  place: string;
+  source: ReviewSource;
+  rating?: 1 | 2 | 3 | 4 | 5;
+};
+
+export const REVIEWS: Review[] = [
   {
     quote:
-      "Franky was true to his word and carried out the work to a high standard. Would 100% recommend and will use his services again.",
-    name: "Verified customer",
-    place: "Kitchen, tiling and flooring",
-    source: "Checkatrade",
+      "We are extremely happy with the worktop and splashback installation. The quality of workmanship is excellent, and the finish looks fantastic. Professional, reliable, and very tidy throughout the job. Would definitely recommend.",
+    name: "Fabio Buitrago",
+    place: "Worktop and splashback",
+    source: "Google",
   },
-] as const;
+  {
+    quote:
+      "Amazing!!!!! To get someone to come out for a small job (6 interior doors to be fitted) is a miracle, but Frankie quoted, then came and did the job, excellently, he is a diamond. Have already asked him for a quote on another job. Courteous, friendly and put up with my dogs!!. Highly recommend.",
+    name: "Christine Bedford",
+    place: "Six internal doors",
+    source: "Google",
+  },
+  {
+    quote:
+      "Really happy to recommend FV joinery. They did an amazing job in my kitchen and really pleased with the floor tiling. Super efficient, friendly and reasonably priced for a great job. 5 * rating. Thank you.",
+    name: "Louise Collinge",
+    place: "Kitchen and floor tiling",
+    source: "Google",
+  },
+  {
+    quote:
+      "Very happy with the work. New shower fitted and various other small plumbing works carried out. Communication was good before the appointment. They came when they said they would. Polite, professional and respectful. Very little fuss. Will use again and would recommend to others.",
+    name: "Chris Moore",
+    place: "New shower and plumbing",
+    source: "Google",
+  },
+  {
+    quote:
+      "Franky from Fv joinery replaced the worktops in our kitchen and did an excellent job- highly recommend. High quality work and great communication from the start. Will be asking Franky to do further work.",
+    name: "Naomi",
+    place: "Kitchen worktops",
+    source: "Google",
+  },
+  {
+    quote:
+      "Great workmanship, nothing too much trouble when things didn't always go to plan. Bathroom looks great thank you. Highly recommend.",
+    name: "Andy Keeney",
+    place: "Bathroom",
+    source: "Google",
+  },
+  {
+    quote:
+      "Amazing and friendly service! I tried my best to put my nans shed together but Franky came to rescue. Managed to arrange convenient time that week and installed the Shed so efficiently. My nan was so pleased once it was finished. Would highly recommend to any one needing any joinery jobs doing.",
+    name: "Nariah Francis",
+    place: "Shed installation",
+    source: "Google",
+  },
+  {
+    quote:
+      "Excellent work carried out on our doors, very professional, work was to a high standard and both kept everything very tidy and clean. I would highly recommend Frankie and team. Thank you!",
+    name: "Bally Dhillon",
+    place: "Internal doors",
+    source: "Google",
+  },
+  {
+    quote:
+      "Franky showed up when said he would, very reliable despite the freezing conditions he did the job. Perfect finish to this installation only job.",
+    name: "Pammie T Mahaka",
+    place: "Installation only",
+    source: "Google",
+  },
+];
+
+export const REVIEW_LINKS: Record<ReviewSource, string> = {
+  Google: BUSINESS.google,
+  Checkatrade: BUSINESS.checkatrade,
+};
+
+/* -------------------------------------------------------------------------- */
+/*  Before and after                                                          */
+/*                                                                            */
+/*  The images below are PLACEHOLDERS and are meant to be replaced. Overwrite  */
+/*  the files in public/before-after/ keeping the same names and the section   */
+/*  picks them up with no code change. Shoot the pair from the same spot at    */
+/*  the same height so the two frames line up when they sit side by side.      */
+/* -------------------------------------------------------------------------- */
+export type BeforeAfter = {
+  subject: string;
+  note: string;
+  detail: string;
+  before: string;
+  beforeAlt: string;
+  after: string;
+  afterAlt: string;
+  /* Set false once a real pair is dropped in, to drop the "awaiting photo"
+     badge. The badge is what stops a placeholder shipping unnoticed. */
+  placeholder?: boolean;
+};
+
+export const BEFORE_AFTER: BeforeAfter[] = [
+  {
+    subject: "Kitchen strip-out to finished room",
+    note: "Building and renovation",
+    detail:
+      "The stage most people never see. Old units out, walls made good and the floor levelled before a single new carcass goes in.",
+    before: "/before-after/kitchen-before.jpg",
+    beforeAlt: "Placeholder image: a kitchen before work started",
+    after: "/before-after/kitchen-after.jpg",
+    afterAlt: "Placeholder image: the same kitchen finished",
+    placeholder: true,
+  },
+  {
+    subject: "Bathroom, back to the joists",
+    note: "Building and renovation",
+    detail:
+      "Stripped out, re-boarded for a wet area and re-plumbed where the new layout needed it, then tiled and sealed.",
+    before: "/before-after/bathroom-before.jpg",
+    beforeAlt: "Placeholder image: a bathroom before work started",
+    after: "/before-after/bathroom-after.jpg",
+    afterAlt: "Placeholder image: the same bathroom finished",
+    placeholder: true,
+  },
+  {
+    subject: "Alcoves boxed in and fitted out",
+    note: "Bespoke joinery",
+    detail:
+      "Two recesses that were not the same width, templated separately and fitted with cupboards below and open shelves above.",
+    before: "/before-after/alcove-before.jpg",
+    beforeAlt: "Placeholder image: bare alcoves before work started",
+    after: "/before-after/alcove-after.jpg",
+    afterAlt: "Placeholder image: the same alcoves fitted with shelving",
+    placeholder: true,
+  },
+];
+

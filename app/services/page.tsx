@@ -1,18 +1,23 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { ImageReveal, Reveal, Stagger, StaggerItem } from "../motion";
 import { Photo } from "../photo";
 import { Illustration } from "../illustrations";
 import ProcessJourney from "../process-journey";
-import { BUSINESS, MATERIALS, PROCESS, SERVICE_GROUPS } from "../site";
 import {
-  ArrowGlyph,
+  BUSINESS,
+  MATERIALS,
+  PROCESS,
+  SERVICE_GROUPS,
+  WHATSAPP_HREF,
+} from "../site";
+import {
   CtaBand,
   Eyebrow,
   Ico,
   PageHero,
   PhoneGlyph,
   SectionHeading,
+  WhatsAppGlyph,
 } from "../ui";
 
 export const metadata: Metadata = {
@@ -178,10 +183,15 @@ export default function ServicesPage() {
                 <PhoneGlyph className="h-[18px] w-[18px]" />
                 {BUSINESS.phoneDisplay}
               </a>
-              <Link href="/contact" className="btn btn-ghost group">
-                Send the details
-                <ArrowGlyph />
-              </Link>
+              <a
+                href={WHATSAPP_HREF}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="btn btn-ghost group"
+              >
+                <WhatsAppGlyph className="h-[18px] w-[18px]" />
+                Send the details on WhatsApp
+              </a>
             </div>
           </Reveal>
         </div>

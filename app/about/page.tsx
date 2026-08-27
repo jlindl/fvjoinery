@@ -11,6 +11,7 @@ import {
   InstagramGlyph,
   PageHero,
   SectionHeading,
+  TikTokGlyph,
 } from "../ui";
 
 export const metadata: Metadata = {
@@ -107,6 +108,15 @@ export default function AboutPage() {
                 >
                   <InstagramGlyph className="h-4 w-4" />
                   {BUSINESS.instagramHandle}
+                </a>
+                <a
+                  href={BUSINESS.tiktok}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="btn btn-ghost btn-sm"
+                >
+                  <TikTokGlyph className="h-4 w-4" />
+                  TikTok
                 </a>
               </div>
             </Reveal>

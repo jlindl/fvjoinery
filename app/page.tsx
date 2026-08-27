@@ -9,14 +9,15 @@ import {
 import { Photo } from "./photo";
 import ProcessJourney from "./process-journey";
 import { Illustration } from "./illustrations";
+import Testimonials from "./testimonials";
 import {
   BUSINESS,
   HOME_WORK,
   MATERIALS,
   PRICE_FACTORS,
   PROCESS,
-  REVIEWS,
   SERVICE_GROUPS,
+  WHATSAPP_HREF,
   STATEMENT,
   TRUST,
 } from "./site";
@@ -26,6 +27,7 @@ import {
   Eyebrow,
   PhoneGlyph,
   SectionHeading,
+  WhatsAppGlyph,
 } from "./ui";
 
 export default function Home() {
@@ -61,10 +63,15 @@ export default function Home() {
                   <PhoneGlyph className="h-[18px] w-[18px]" />
                   {BUSINESS.phoneDisplay}
                 </a>
-                <Link href="/contact" className="btn btn-ghost-light group">
-                  Get a price
-                  <ArrowGlyph />
-                </Link>
+                <a
+                  href={WHATSAPP_HREF}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="btn btn-ghost-light group"
+                >
+                  <WhatsAppGlyph className="h-[18px] w-[18px]" />
+                  Message on WhatsApp
+                </a>
               </div>
             </Reveal>
           </div>
@@ -393,41 +400,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ========================= TESTIMONIAL ========================= */}
-      <section
-        className="bg-surface py-24 sm:py-28"
-        aria-label="Customer review"
-      >
-        <div className="mx-auto max-w-3xl px-5 sm:px-8">
-          <Reveal>
-            <Eyebrow>From a customer</Eyebrow>
-          </Reveal>
-          {REVIEWS.map((r) => (
-            <Reveal key={r.quote} delay={0.08}>
-              <figure className="mt-8">
-                <blockquote className="text-pretty font-display text-[1.5rem] font-medium leading-[1.4] tracking-[-0.02em] text-ink sm:text-[1.9rem]">
-                  &ldquo;{r.quote}&rdquo;
-                </blockquote>
-                <figcaption className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
-                  <span className="font-semibold text-ink">{r.name}</span>
-                  <span aria-hidden="true" className="text-muted">
-                    /
-                  </span>
-                  <span className="text-muted">{r.place}</span>
-                  <a
-                    href={BUSINESS.checkatrade}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    className="text-muted underline decoration-hairline decoration-1 underline-offset-4 transition-colors hover:text-ink"
-                  >
-                    via {r.source}
-                  </a>
-                </figcaption>
-              </figure>
-            </Reveal>
-          ))}
-        </div>
-      </section>
+      <Testimonials limit={6} />
 
       <CtaBand />
     </>

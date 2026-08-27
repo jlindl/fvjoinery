@@ -57,6 +57,11 @@ gallery, which lays every job out as a 3:2 row.
 originals live in `source-photos/` at the app root, outside `public/`, so they
 are never served to browsers.
 
+## Related folders
+
+`public/before-after/` holds the before-and-after pairs, which are still
+placeholders. See the README in there for how to replace them.
+
 ## Still wanted
 
 Photos of **alcove shelving** and **wall panelling**. Both are listed services

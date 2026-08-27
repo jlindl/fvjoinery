@@ -1,19 +1,12 @@
-"use client";
-
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { BUSINESS } from "./site";
-import { PhoneGlyph } from "./ui";
+import { BUSINESS, WHATSAPP_HREF } from "./site";
+import { PhoneGlyph, WhatsAppGlyph } from "./ui";
 
 /**
- * Mobile-only sticky action bar. The second button points at /contact, except
- * on the contact page itself where it would be a no-op — there it becomes an
- * email link instead.
+ * Mobile-only sticky action bar: call, or message on WhatsApp. Both are direct
+ * actions, so this needs no hooks and no route awareness, which is why it is a
+ * server component.
  */
 export default function CallBar() {
-  const pathname = usePathname();
-  const onContact = pathname === "/contact";
-
   return (
     <div className="fixed inset-x-0 bottom-0 z-40 border-t border-hairline bg-paper/95 px-3 py-2.5 backdrop-blur lg:hidden">
       <div className="mx-auto flex max-w-md items-center gap-2.5">
@@ -21,18 +14,16 @@ export default function CallBar() {
           <PhoneGlyph className="h-5 w-5" />
           Call {BUSINESS.phoneDisplay}
         </a>
-        {onContact ? (
-          <a
-            href={`mailto:${BUSINESS.email}`}
-            className="btn btn-ghost h-12 px-4"
-          >
-            Email
-          </a>
-        ) : (
-          <Link href="/contact" className="btn btn-ghost h-12 px-4">
-            Quote
-          </Link>
-        )}
+        <a
+          href={WHATSAPP_HREF}
+          target="_blank"
+          rel="noreferrer noopener"
+          aria-label="Message FV Joinery on WhatsApp"
+          className="btn btn-ghost h-12 px-4"
+        >
+          <WhatsAppGlyph className="h-5 w-5" />
+          WhatsApp
+        </a>
       </div>
     </div>
   );

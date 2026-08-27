@@ -1,6 +1,12 @@
 import Link from "next/link";
 import { AREAS, BUSINESS, NAV, SERVICE_GROUPS } from "./site";
-import { InstagramGlyph, LogoFull, MailGlyph, PhoneGlyph } from "./ui";
+import {
+  InstagramGlyph,
+  LogoFull,
+  MailGlyph,
+  PhoneGlyph,
+  TikTokGlyph,
+} from "./ui";
 
 export default function SiteFooter() {
   const year = new Date().getFullYear();
@@ -28,6 +34,15 @@ export default function SiteFooter() {
                 className="grid h-10 w-10 place-items-center rounded-lg border border-white/20 text-white/80 transition-colors hover:border-white/45 hover:text-white"
               >
                 <InstagramGlyph className="h-5 w-5" />
+              </a>
+              <a
+                href={BUSINESS.tiktok}
+                target="_blank"
+                rel="noreferrer noopener"
+                aria-label={`FV Joinery on TikTok (${BUSINESS.tiktokHandle})`}
+                className="grid h-10 w-10 place-items-center rounded-lg border border-white/20 text-white/80 transition-colors hover:border-white/45 hover:text-white"
+              >
+                <TikTokGlyph className="h-5 w-5" />
               </a>
               <a
                 href={BUSINESS.checkatrade}

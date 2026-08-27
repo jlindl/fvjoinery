@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { BUSINESS, type IconName } from "./site";
+import { BUSINESS, WHATSAPP_HREF, type IconName } from "./site";
 import { Reveal } from "./motion";
 
 /* ==========================================================================
@@ -188,6 +188,65 @@ export function InstagramGlyph({ className = "" }: { className?: string }) {
       <circle cx="12" cy="12" r="4" />
       <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" />
     </svg>
+  );
+}
+
+/* WhatsApp mark: filled bubble with the handset knocked out, which is the only
+   form that stays legible at 16-18px. */
+export function WhatsAppGlyph({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.85 9.85 0 0 0 12.04 2Zm0 1.8c2.16 0 4.19.84 5.72 2.37a8.05 8.05 0 0 1 2.37 5.73c0 4.47-3.63 8.1-8.1 8.1a8.1 8.1 0 0 1-4.13-1.13l-.3-.18-3.06.8.82-3-.19-.31a8.03 8.03 0 0 1-1.24-4.3c0-4.46 3.64-8.09 8.11-8.09Z" />
+      <path d="M9.36 7.2c-.18-.42-.38-.42-.55-.43h-.47c-.16 0-.43.06-.66.31-.22.25-.86.85-.86 2.06s.89 2.39 1.01 2.56c.12.16 1.71 2.75 4.23 3.74 2.09.83 2.52.66 2.97.62.46-.04 1.47-.6 1.68-1.19.2-.58.2-1.08.14-1.19-.06-.1-.22-.16-.47-.29-.24-.12-1.46-.72-1.69-.8-.22-.09-.39-.13-.55.12-.16.25-.63.8-.77.96-.14.17-.28.19-.53.06-.24-.12-1.04-.38-1.99-1.22-.73-.65-1.23-1.46-1.37-1.71-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.24-.41.08-.17.04-.31-.02-.43-.06-.13-.54-1.34-.75-1.83Z" />
+    </svg>
+  );
+}
+
+/* Drawn as a filled path rather than a stroke: the note-and-tail shape does
+   not read at 16px in outline form the way the Instagram square does. */
+export function TikTokGlyph({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M16.5 2h-3.2v14.2a2.6 2.6 0 1 1-2.6-2.6c.24 0 .47.03.7.1v-3.3a6 6 0 0 0-.7-.05 5.9 5.9 0 1 0 5.9 5.9V9.6a7.3 7.3 0 0 0 4.3 1.4V7.7a4.1 4.1 0 0 1-4.4-4.1V2Z" />
+    </svg>
+  );
+}
+
+/* A row of five, filled to the rating. The stars are decorative: the
+   accessible name comes from the visually-hidden text, so a screen reader
+   hears "5 out of 5" once rather than five identical star labels. */
+export function Stars({
+  rating,
+  className = "h-4 w-4",
+}: {
+  rating: number;
+  className?: string;
+}) {
+  return (
+    <span className="flex items-center gap-0.5">
+      {[1, 2, 3, 4, 5].map((n) => (
+        <svg
+          key={n}
+          viewBox="0 0 24 24"
+          className={[className, n <= rating ? "text-accent" : "text-hairline"].join(" ")}
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.58 1.11 6.47L12 17.44 6.19 20.5 7.3 14.03 2.6 9.45l6.5-.95L12 2.6Z" />
+        </svg>
+      ))}
+      <span className="sr-only">{rating} out of 5</span>
+    </span>
   );
 }
 
@@ -461,10 +520,15 @@ export function CtaBand({
               <PhoneGlyph className="h-[18px] w-[18px]" />
               {BUSINESS.phoneDisplay}
             </a>
-            <Link href="/contact" className="btn btn-ghost-light group">
-              Request a quote
-              <ArrowGlyph />
-            </Link>
+            <a
+              href={WHATSAPP_HREF}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="btn btn-ghost-light group"
+            >
+              <WhatsAppGlyph className="h-[18px] w-[18px]" />
+              Message on WhatsApp
+            </a>
           </div>
         </Reveal>
       </div>

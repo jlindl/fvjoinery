@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import BeforeAfter from "../before-after";
 import { ImageReveal, Reveal } from "../motion";
 import { Photo } from "../photo";
 import { Illustration } from "../illustrations";
-import { BUSINESS, REVIEWS, SERVICE_GROUPS, WORK } from "../site";
+import Testimonials from "../testimonials";
+import { BUSINESS, SERVICE_GROUPS, WORK } from "../site";
 import {
   CtaBand,
-  Eyebrow,
   InstagramGlyph,
   PageHero,
   SectionHeading,
+  TikTokGlyph,
 } from "../ui";
 
 export const metadata: Metadata = {
@@ -31,15 +33,26 @@ export default function WorkPage() {
         accent="you live with."
         intro="A look at the kind of work we take on, from a single fitted unit to a room taken back to brick. New jobs go up on Instagram as they come off the tools."
       >
-        <a
-          href={BUSINESS.instagram}
-          target="_blank"
-          rel="noreferrer noopener"
-          className="btn btn-ghost-light mt-10"
-        >
-          <InstagramGlyph className="h-[18px] w-[18px]" />
-          {BUSINESS.instagramHandle}
-        </a>
+        <div className="mt-10 flex flex-wrap gap-3">
+          <a
+            href={BUSINESS.instagram}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="btn btn-ghost-light"
+          >
+            <InstagramGlyph className="h-[18px] w-[18px]" />
+            {BUSINESS.instagramHandle}
+          </a>
+          <a
+            href={BUSINESS.tiktok}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="btn btn-ghost-light"
+          >
+            <TikTokGlyph className="h-[18px] w-[18px]" />
+            TikTok
+          </a>
+        </div>
       </PageHero>
 
       {/* ========================= EDITORIAL LIST ========================= */}
@@ -132,38 +145,9 @@ export default function WorkPage() {
         </div>
       </section>
 
-      {/* ========================= TESTIMONIAL ========================= */}
-      <section className="bg-surface py-24 sm:py-28" aria-label="Customer review">
-        <div className="mx-auto max-w-3xl px-5 sm:px-8">
-          <Reveal>
-            <Eyebrow>From a customer</Eyebrow>
-          </Reveal>
-          {REVIEWS.map((r) => (
-            <Reveal key={r.quote} delay={0.08}>
-              <figure className="mt-8">
-                <blockquote className="text-pretty font-display text-[1.5rem] font-medium leading-[1.4] tracking-[-0.02em] text-ink sm:text-[1.9rem]">
-                  &ldquo;{r.quote}&rdquo;
-                </blockquote>
-                <figcaption className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
-                  <span className="font-semibold text-ink">{r.name}</span>
-                  <span aria-hidden="true" className="text-muted">
-                    /
-                  </span>
-                  <span className="text-muted">{r.place}</span>
-                  <a
-                    href={BUSINESS.checkatrade}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    className="text-muted underline decoration-hairline decoration-1 underline-offset-4 transition-colors hover:text-ink"
-                  >
-                    via {r.source}
-                  </a>
-                </figcaption>
-              </figure>
-            </Reveal>
-          ))}
-        </div>
-      </section>
+      <BeforeAfter />
+
+      <Testimonials tone="light" />
 
       <CtaBand
         title="Want something like this?"
