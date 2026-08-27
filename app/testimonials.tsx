@@ -85,19 +85,6 @@ export default function Testimonials({
               Read reviews on Google
               <ArrowGlyph />
             </a>
-            <a
-              href={REVIEW_LINKS.Checkatrade}
-              target="_blank"
-              rel="noreferrer noopener"
-              className={[
-                "text-sm underline decoration-1 underline-offset-4 transition-colors",
-                dark
-                  ? "text-white/70 decoration-white/30 hover:text-white"
-                  : "text-muted decoration-hairline hover:text-ink",
-              ].join(" ")}
-            >
-              Checkatrade profile
-            </a>
           </div>
         </Reveal>
       </div>

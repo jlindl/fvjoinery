@@ -4,6 +4,7 @@ import { Reveal, Stagger, StaggerItem } from "../motion";
 import ProcessJourney from "../process-journey";
 import { AREAS, BUSINESS, FAQS, PROCESS, WHATSAPP_HREF } from "../site";
 import {
+  ArrowGlyph,
   Eyebrow,
   InstagramGlyph,
   MailGlyph,
@@ -95,55 +96,63 @@ export default function ContactPage() {
                 </a>
               </Reveal>
 
+              {/* One row each, full width. These were three cards in a
+                  three-column grid, which left each card about 130px wide and
+                  broke "infofyvhandyman19@gmail.com" into a four-line stack of
+                  fragments. A single column gives every value room to sit on
+                  one line. */}
               <Reveal delay={0.2}>
-                <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  <a
-                    href={`mailto:${BUSINESS.email}`}
-                    className="card flex items-start gap-3 p-5"
-                  >
-                    <MailGlyph className="mt-0.5 h-5 w-5 shrink-0 text-muted" />
-                    <span>
-                      <span className="block text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">
-                        Email
-                      </span>
-                      <span className="mt-0.5 block break-all text-sm font-medium text-ink">
-                        {BUSINESS.email}
-                      </span>
-                    </span>
-                  </a>
-                  <a
-                    href={BUSINESS.instagram}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    className="card flex items-start gap-3 p-5"
-                  >
-                    <InstagramGlyph className="mt-0.5 h-5 w-5 shrink-0 text-muted" />
-                    <span>
-                      <span className="block text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">
-                        Instagram
-                      </span>
-                      <span className="mt-0.5 block break-all text-sm font-medium text-ink">
-                        {BUSINESS.instagramHandle}
-                      </span>
-                    </span>
-                  </a>
-                  <a
-                    href={BUSINESS.tiktok}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    className="card flex items-start gap-3 p-5"
-                  >
-                    <TikTokGlyph className="mt-0.5 h-5 w-5 shrink-0 text-muted" />
-                    <span>
-                      <span className="block text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">
-                        TikTok
-                      </span>
-                      <span className="mt-0.5 block break-all text-sm font-medium text-ink">
-                        {BUSINESS.tiktokHandle}
-                      </span>
-                    </span>
-                  </a>
-                </div>
+                <ul className="mt-4 overflow-hidden rounded-md border border-hairline bg-surface shadow-card">
+                  {[
+                    {
+                      label: "Email",
+                      value: BUSINESS.email,
+                      href: `mailto:${BUSINESS.email}`,
+                      icon: <MailGlyph className="h-5 w-5" />,
+                      external: false,
+                    },
+                    {
+                      label: "Instagram",
+                      value: BUSINESS.instagramHandle,
+                      href: BUSINESS.instagram,
+                      icon: <InstagramGlyph className="h-5 w-5" />,
+                      external: true,
+                    },
+                    {
+                      label: "TikTok",
+                      value: BUSINESS.tiktokHandle,
+                      href: BUSINESS.tiktok,
+                      icon: <TikTokGlyph className="h-5 w-5" />,
+                      external: true,
+                    },
+                  ].map((row) => (
+                    <li
+                      key={row.label}
+                      className="border-t border-hairline first:border-t-0"
+                    >
+                      <a
+                        href={row.href}
+                        {...(row.external
+                          ? { target: "_blank", rel: "noreferrer noopener" }
+                          : {})}
+                        className="group flex items-center gap-4 px-5 py-4 transition-colors hover:bg-paper"
+                      >
+                        <span className="shrink-0 text-muted transition-colors group-hover:text-ink">
+                          {row.icon}
+                        </span>
+                        <span className="min-w-0 flex-1">
+                          <span className="block text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">
+                            {row.label}
+                          </span>
+                          <span className="mt-0.5 block break-words text-[0.95rem] font-medium text-ink">
+                            {row.value}
+                          </span>
+                        </span>
+                        <ArrowGlyph />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </Reveal>
 
               <Reveal delay={0.24}>
@@ -167,12 +176,12 @@ export default function ContactPage() {
                     </dt>
                     <dd>
                       <a
-                        href={BUSINESS.checkatrade}
+                        href={BUSINESS.google}
                         target="_blank"
                         rel="noreferrer noopener"
                         className="text-ink underline decoration-hairline decoration-1 underline-offset-4 transition-colors hover:text-muted"
                       >
-                        Checkatrade profile
+                        Read them on Google
                       </a>
                     </dd>
                   </div>

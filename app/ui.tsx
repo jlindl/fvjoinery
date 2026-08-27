@@ -224,7 +224,12 @@ export function TikTokGlyph({ className = "" }: { className?: string }) {
 
 /* A row of five, filled to the rating. The stars are decorative: the
    accessible name comes from the visually-hidden text, so a screen reader
-   hears "5 out of 5" once rather than five identical star labels. */
+   hears "5 out of 5" once rather than five identical star labels.
+
+   Unfilled stars inherit currentColor at 70% rather than taking a fixed tint.
+   A hairline-coloured star is about 1.1:1 on paper, so "4 out of 5" would look
+   identical to five, and any fixed light tint that works on paper disappears
+   on the dark variant of this section. */
 export function Stars({
   rating,
   className = "h-4 w-4",
@@ -238,7 +243,7 @@ export function Stars({
         <svg
           key={n}
           viewBox="0 0 24 24"
-          className={[className, n <= rating ? "text-accent" : "text-hairline"].join(" ")}
+          className={[className, n <= rating ? "text-accent" : "opacity-70"].join(" ")}
           fill="currentColor"
           aria-hidden="true"
         >

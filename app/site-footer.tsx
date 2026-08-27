@@ -44,14 +44,6 @@ export default function SiteFooter() {
               >
                 <TikTokGlyph className="h-5 w-5" />
               </a>
-              <a
-                href={BUSINESS.checkatrade}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="rounded-lg border border-white/20 px-3.5 py-2.5 text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-white/80 transition-colors hover:border-white/45 hover:text-white"
-              >
-                Checkatrade
-              </a>
             </div>
           </div>
 
@@ -140,9 +132,14 @@ export default function SiteFooter() {
           <p className="text-[0.72rem] uppercase tracking-[0.12em] text-white/70">
             © {year} {BUSINESS.name} · {BUSINESS.base}, UK
           </p>
-          <p className="text-[0.72rem] uppercase tracking-[0.16em] text-white/60">
-            Built to the wall you have
-          </p>
+          <div className="flex flex-col items-start gap-1 sm:items-end">
+            <p className="text-[0.72rem] uppercase tracking-[0.16em] text-white/60">
+              Built to the wall you have
+            </p>
+            <p className="text-[0.68rem] tracking-[0.08em] text-white/55">
+              Powered by Integrate Web Design
+            </p>
+          </div>
         </div>
       </div>
     </footer>

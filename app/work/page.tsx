@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import BeforeAfter from "../before-after";
+import Carousel from "../carousel";
 import { ImageReveal, Reveal } from "../motion";
 import { Photo } from "../photo";
 import { Illustration } from "../illustrations";
@@ -77,21 +78,27 @@ export default function WorkPage() {
                   <div
                     className={`lg:col-span-7 ${flipped ? "lg:order-2" : ""}`}
                   >
-                    <ImageReveal className="relative aspect-[3/2] overflow-hidden rounded-md">
-                      <Photo
-                        item={{
-                          ...item,
-                          art: (
-                            <Illustration
-                              variant={item.art}
-                              index={String(i + 1).padStart(2, "0")}
-                              label={item.subject}
-                            />
-                          ),
-                        }}
-                        sizes="(max-width: 1024px) 100vw, 58vw"
-                      />
-                    </ImageReveal>
+                    {item.gallery ? (
+                      <ImageReveal>
+                        <Carousel slides={item.gallery} label={item.subject} />
+                      </ImageReveal>
+                    ) : (
+                      <ImageReveal className="relative aspect-[3/2] overflow-hidden rounded-md">
+                        <Photo
+                          item={{
+                            ...item,
+                            art: (
+                              <Illustration
+                                variant={item.art}
+                                index={String(i + 1).padStart(2, "0")}
+                                label={item.subject}
+                              />
+                            ),
+                          }}
+                          sizes="(max-width: 1024px) 100vw, 58vw"
+                        />
+                      </ImageReveal>
+                    )}
                   </div>
 
                   <div className="lg:col-span-5">

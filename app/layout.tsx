@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     template: `%s | ${BUSINESS.shortName}`,
   },
   description:
-    "Fitted joinery and building work across Leicestershire and the Midlands. Alcove units, wall panelling, kitchens, bathrooms, renovations and finishes. Free itemised quotes, Checkatrade listed.",
+    "Fitted joinery and building work across Leicestershire and the Midlands. Alcove units, wall panelling, kitchens, bathrooms, renovations and finishes. Free itemised quotes. Free itemised quotes.",
   keywords: [
     "joiner Leicestershire",
     "carpenter Leicester",
@@ -73,7 +73,7 @@ const jsonLd = {
     addressRegion: BUSINESS.base,
     addressCountry: "GB",
   },
-  sameAs: [BUSINESS.instagram, BUSINESS.checkatrade],
+  sameAs: [BUSINESS.instagram, BUSINESS.tiktok, BUSINESS.google],
   paymentAccepted: "Cash, Debit Card, Credit Card",
   priceRange: "££",
   hasOfferCatalog: {

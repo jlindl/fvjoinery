@@ -1,42 +1,37 @@
 # Before and after pairs
 
-The six JPGs in this folder are **placeholders**. Each one has its own filename
-printed on it, so you can see on the page exactly which file to replace.
+Four real pairs, all live on the Work page. No placeholders remain.
 
-## Replacing them
+| Pair                             | Files                                                          |
+| -------------------------------- | -------------------------------------------------------------- |
+| Garden room, framed to finished  | `garden-room-frame-before.jpg` / `garden-room-frame-after.jpg`  |
+| Knocked-through opening, doors   | `doors-before.jpg` / `doors-after.jpg`                          |
+| Garden room, shell to finished   | `garden-room-before.jpg` / `garden-room-after.jpg`              |
+| Floor levelled and laid          | `flooring-before.jpg` / `flooring-after.jpg`                    |
 
-Overwrite the file, keep the name. No code change needed.
+The two garden-room pairs are deliberately not next to each other in
+`BEFORE_AFTER`, so the section does not read as one job shown twice.
 
-| File                    | Pair                            |
-| ----------------------- | ------------------------------- |
-| `kitchen-before.jpg`    | Kitchen strip-out to finished   |
-| `kitchen-after.jpg`     |                                 |
-| `bathroom-before.jpg`   | Bathroom, back to the joists    |
-| `bathroom-after.jpg`    |                                 |
-| `alcove-before.jpg`     | Alcoves boxed in and fitted out |
-| `alcove-after.jpg`      |                                 |
+## Adding a pair
 
-Then open `app/site.ts`, find `BEFORE_AFTER`, and for each pair you have
-replaced:
-
-1. Delete the `placeholder: true` line. That removes the orange **Awaiting
-   photos** badge from the page — while the badge is showing, nobody can
-   mistake a placeholder for real work.
-2. Rewrite `beforeAlt` and `afterAlt` to describe what the photos actually
-   show. They currently say "Placeholder image".
-3. Check `subject`, `note` and `detail` still match the job.
-
-To add a fourth pair, copy an entry in `BEFORE_AFTER`. To drop one, delete it —
-the section hides itself entirely if the array is empty.
+1. Drop the two files in here.
+2. Copy an entry in `BEFORE_AFTER` in `app/site.ts` and point `before` / `after`
+   at them. Write real `beforeAlt` / `afterAlt` describing what each shows.
+3. If you are waiting on the real photos, set `placeholder: true` on the entry.
+   That renders an orange **Awaiting photos** badge so a stand-in cannot ship
+   unnoticed. Delete the line once the real pair is in.
 
 ## Shooting the pairs
 
-The section puts the two frames **side by side at 4:3**, so:
+The section puts the two frames **side by side at 4:3**, and they are
+centre-cropped to get there, so:
 
-- Stand in the same spot, at the same height, for both shots. If the framing
-  drifts the comparison stops working.
-- Landscape, roughly 4:3, about 1600px on the long edge.
+- Stand in the same spot, at the same height, for both shots. The comparison
+  stops working the moment the framing drifts.
+- Landscape is ideal. Portrait phone shots work — all three pairs here are
+  portrait — but the top and bottom get cropped away, so keep the subject
+  centred rather than filling the frame.
 - Take the "before" shot before anything comes out. It is the one that always
-  gets forgotten, and it is the one that makes the pair worth looking at.
-- Same lights on for both, if you can. A dark before and a bright after reads
+  gets forgotten and the one that makes the pair worth looking at.
+- Same lights on for both where you can. A dark before and a bright after reads
   as a lighting trick rather than a change to the room.

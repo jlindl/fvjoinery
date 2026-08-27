@@ -28,7 +28,6 @@ export const BUSINESS = {
   instagramHandle: "@fv_joinery_building",
   tiktok: "https://www.tiktok.com/@fvjoneryandbuilding",
   tiktokHandle: "@fvjoneryandbuilding",
-  checkatrade: "https://www.checkatrade.com/trades/fvjoineryandbuildingsolutions",
   /* TODO: swap for the real Google Business Profile share link (Google Maps >
      the business > Share). This Maps search finds the business and works, but
      a profile link is what you want on a "read our reviews" button. */
@@ -69,7 +68,7 @@ export const STATEMENT =
   "Most houses around here were built before anyone thought about flat-pack. Walls lean, floors dip, and chimney breasts are never quite square. We measure what is actually there and build to those numbers, so the finished job sits tight against the wall instead of being packed out and filled.";
 
 export const TRUST = [
-  { k: "Checkatrade", v: "Listed and reviewed" },
+  { k: "5 star", v: "Rated on Google" },
   { k: "Free", v: "Quotes and site visits" },
   { k: "Midlands", v: "East and West covered" },
   { k: "Cards", v: "Cash, debit and credit" },
@@ -161,9 +160,9 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
     caption: "The structural side of a project",
     summary:
       "Rooms taken back to brick and rebuilt. We handle the sequence so trades turn up in the right order and the job does not stall halfway.",
-    image: "/work/bathroom.jpg",
+    image: "/work/bathroom-2.jpg",
     imageAlt:
-      "A loft bathroom with patterned floor tiles and a metro-tiled walk-in shower",
+      "A bathroom vanity: a counter-top basin on a solid timber top over green shaker doors",
     art: "kitchen",
     items: [
       {
@@ -345,6 +344,10 @@ export type WorkItem = {
   /* Shown in the home-page mosaic. The four flagged here are the four photos
      that appear nowhere else on the home page, so nothing repeats down it. */
   onHome?: boolean;
+  /* More angles of the same job. When set, the Work page renders a carousel
+     instead of a single photo, starting from `src`. Only worth it when the
+     extra frames show something the first one cannot. */
+  gallery?: { src: string; alt: string }[];
 };
 
 /* Every entry is a photograph of our own work. The Work page renders these as
@@ -394,10 +397,24 @@ export const WORK: WorkItem[] = [
     subject: "Bathroom installation",
     note: "Building and renovation",
     art: "bathroom",
-    src: "/work/bathroom.jpg",
+    src: "/work/bathroom-1.jpg",
     alt: "A loft bathroom with patterned floor tiles, a metro-tiled walk-in shower, a green vanity unit and a bespoke door into the eaves",
     detail:
       "A room with a sloping ceiling, so the shower went where the headroom was. Patterned floor set out from the centre line to keep the cuts equal at both walls, and the eaves cupboard door made to match the vanity.",
+    gallery: [
+      {
+        src: "/work/bathroom-1.jpg",
+        alt: "The bathroom looking towards the walk-in shower, with a bespoke green door into the eaves on the left",
+      },
+      {
+        src: "/work/bathroom-2.jpg",
+        alt: "The vanity unit under the window: a counter-top basin on a solid timber top over green shaker doors, with metro tiling behind",
+      },
+      {
+        src: "/work/bathroom-3.jpg",
+        alt: "The full width of the bathroom, with the WC beside the vanity and the tiled shower enclosure to the right",
+      },
+    ],
   },
   {
     subject: "Composite decking",
@@ -458,11 +475,6 @@ export const FAQS = [
   },
 ] as const;
 
-/* -------------------------------------------------------------------------- */
-/*  Reviews                                                                   */
-/*  From FV's Checkatrade profile. Verify wording against the live profile    */
-/*  before launch, and add new ones here as they come in.                     */
-/* -------------------------------------------------------------------------- */
 /*  Reviews                                                                   */
 /*                                                                            */
 /*  ONLY real, published reviews go in this array. Never write one, never      */
@@ -479,11 +491,12 @@ export const FAQS = [
 /*  with "...More" were left out rather than completed from guesswork, so      */
 /*  there are more on the profile than are shown here.                        */
 /*                                                                            */
-/*  `rating` is out of 5 and is deliberately unset: the star counts were not   */
-/*  to hand when these were transcribed, and a star row is a factual claim.    */
-/*  Fill it in per review and the stars appear on their own.                  */
+/*  All nine are 5 star, confirmed by FV. `rating` is out of 5 and drives the  */
+/*  star row, so set it on any review added later rather than leaving it to    */
+/*  default: an unrated review renders with no stars beside the ones that have */
+/*  them, which reads as a worse review rather than an unknown one.            */
 /* -------------------------------------------------------------------------- */
-export type ReviewSource = "Google" | "Checkatrade";
+export type ReviewSource = "Google";
 
 export type Review = {
   quote: string;
@@ -501,6 +514,7 @@ export const REVIEWS: Review[] = [
     name: "Fabio Buitrago",
     place: "Worktop and splashback",
     source: "Google",
+    rating: 5,
   },
   {
     quote:
@@ -508,6 +522,7 @@ export const REVIEWS: Review[] = [
     name: "Christine Bedford",
     place: "Six internal doors",
     source: "Google",
+    rating: 5,
   },
   {
     quote:
@@ -515,6 +530,7 @@ export const REVIEWS: Review[] = [
     name: "Louise Collinge",
     place: "Kitchen and floor tiling",
     source: "Google",
+    rating: 5,
   },
   {
     quote:
@@ -522,6 +538,7 @@ export const REVIEWS: Review[] = [
     name: "Chris Moore",
     place: "New shower and plumbing",
     source: "Google",
+    rating: 5,
   },
   {
     quote:
@@ -529,6 +546,7 @@ export const REVIEWS: Review[] = [
     name: "Naomi",
     place: "Kitchen worktops",
     source: "Google",
+    rating: 5,
   },
   {
     quote:
@@ -536,6 +554,7 @@ export const REVIEWS: Review[] = [
     name: "Andy Keeney",
     place: "Bathroom",
     source: "Google",
+    rating: 5,
   },
   {
     quote:
@@ -543,6 +562,7 @@ export const REVIEWS: Review[] = [
     name: "Nariah Francis",
     place: "Shed installation",
     source: "Google",
+    rating: 5,
   },
   {
     quote:
@@ -550,6 +570,7 @@ export const REVIEWS: Review[] = [
     name: "Bally Dhillon",
     place: "Internal doors",
     source: "Google",
+    rating: 5,
   },
   {
     quote:
@@ -557,21 +578,22 @@ export const REVIEWS: Review[] = [
     name: "Pammie T Mahaka",
     place: "Installation only",
     source: "Google",
+    rating: 5,
   },
 ];
 
 export const REVIEW_LINKS: Record<ReviewSource, string> = {
   Google: BUSINESS.google,
-  Checkatrade: BUSINESS.checkatrade,
 };
 
 /* -------------------------------------------------------------------------- */
 /*  Before and after                                                          */
 /*                                                                            */
-/*  The images below are PLACEHOLDERS and are meant to be replaced. Overwrite  */
-/*  the files in public/before-after/ keeping the same names and the section   */
-/*  picks them up with no code change. Shoot the pair from the same spot at    */
-/*  the same height so the two frames line up when they sit side by side.      */
+/*  Every pair below is a real job, shot from the same spot at the start and   */
+/*  at the end. To add one, drop the two files in public/before-after/ and     */
+/*  copy an entry. Set `placeholder: true` on anything still waiting on real   */
+/*  photos and it renders an "Awaiting photos" badge, so a stand-in cannot     */
+/*  ship unnoticed. Nothing uses it at the moment.                            */
 /* -------------------------------------------------------------------------- */
 export type BeforeAfter = {
   subject: string;
@@ -581,44 +603,58 @@ export type BeforeAfter = {
   beforeAlt: string;
   after: string;
   afterAlt: string;
-  /* Set false once a real pair is dropped in, to drop the "awaiting photo"
-     badge. The badge is what stops a placeholder shipping unnoticed. */
   placeholder?: boolean;
 };
 
 export const BEFORE_AFTER: BeforeAfter[] = [
   {
-    subject: "Kitchen strip-out to finished room",
-    note: "Building and renovation",
+    subject: "Garden room, framed to finished",
+    note: "Outdoor building",
     detail:
-      "The stage most people never see. Old units out, walls made good and the floor levelled before a single new carcass goes in.",
-    before: "/before-after/kitchen-before.jpg",
-    beforeAlt: "Placeholder image: a kitchen before work started",
-    after: "/before-after/kitchen-after.jpg",
-    afterAlt: "Placeholder image: the same kitchen finished",
-    placeholder: true,
+      "Studwork, bracing and the roof deck go up first, and everything after that hangs off getting this stage square. Insulated and clad once it was closed in, with the doors set out on the centre line of the front elevation.",
+    before: "/before-after/garden-room-frame-before.jpg",
+    beforeAlt:
+      "A garden room at frame stage: bare timber studs and bracing under a finished flat roof, open at the front",
+    after: "/before-after/garden-room-frame-after.jpg",
+    afterAlt:
+      "The same garden room finished in cedar cladding with French doors and full-height windows either side",
   },
   {
-    subject: "Bathroom, back to the joists",
-    note: "Building and renovation",
-    detail:
-      "Stripped out, re-boarded for a wet area and re-plumbed where the new layout needed it, then tiled and sealed.",
-    before: "/before-after/bathroom-before.jpg",
-    beforeAlt: "Placeholder image: a bathroom before work started",
-    after: "/before-after/bathroom-after.jpg",
-    afterAlt: "Placeholder image: the same bathroom finished",
-    placeholder: true,
-  },
-  {
-    subject: "Alcoves boxed in and fitted out",
+    subject: "Knocked-through opening, doors hung",
     note: "Bespoke joinery",
     detail:
-      "Two recesses that were not the same width, templated separately and fitted with cupboards below and open shelves above.",
-    before: "/before-after/alcove-before.jpg",
-    beforeAlt: "Placeholder image: bare alcoves before work started",
-    after: "/before-after/alcove-after.jpg",
-    afterAlt: "Placeholder image: the same alcoves fitted with shelving",
-    placeholder: true,
+      "A bare opening between two rooms, squared and lined before anything was hung in it. Three doors after, set so the gaps between them match each other as well as the frame.",
+    before: "/before-after/doors-before.jpg",
+    beforeAlt:
+      "A wide bare opening between two rooms, lined but with no doors fitted",
+    after: "/before-after/doors-after.jpg",
+    afterAlt:
+      "The same opening with three glazed white doors hung in it, protective film still on the glass",
+  },
+  {
+    subject: "Garden room, shell to finished",
+    note: "Outdoor building",
+    detail:
+      "Framed and sheathed first, and made weathertight before any cladding went near it. The cedar goes on last so the boards can be set out to land evenly either side of the doors.",
+    before: "/before-after/garden-room-before.jpg",
+    beforeAlt:
+      "A garden room part-built, still in bare OSB sheathing with the doors fitted and no cladding",
+    after: "/before-after/garden-room-after.jpg",
+    afterAlt:
+      "The same garden room finished in cedar cladding with an anthracite roof trim and window",
+  },
+  {
+    subject: "Floor levelled and laid",
+    note: "Finishes and outdoor",
+    detail:
+      "The screed underneath had lifted and cracked right across the room. Levelled first, because nothing you lay on top hides a dip, then set out so the pattern runs square to the window wall.",
+    before: "/before-after/flooring-before.jpg",
+    beforeAlt:
+      "A bare room with cracked, patchy screed where the old floor covering has been lifted",
+    after: "/before-after/flooring-after.jpg",
+    afterAlt:
+      "The same room with parquet-effect flooring laid, running square to the window wall",
   },
 ];
+
 
